@@ -7,6 +7,17 @@ interface Todo {
   completed: boolean;
 }
 
+const todoPrompts = [
+  'What do you want to do?',
+  'What do you want to accomplish?',
+  'What do you want to achieve?',
+  'What do you want to complete?',
+  'What do you want to finish?',
+  'What do you want to work on?',
+  'What do you want to start?',
+  'What do you want to improve?',
+];
+
 function App() {
   const [value, setValue] = useState('');
   const [todos, setTodos] = useState<Todo[]>(() => {
@@ -79,7 +90,9 @@ function App() {
             <span className="flex flex-row gap-2 py-2">
               <input
                 type="text"
-                placeholder="What do you want to do?"
+                placeholder={
+                  todoPrompts[Math.floor(Math.random() * todoPrompts.length)]
+                }
                 value={value}
                 onChange={handleChange}
                 className="w-full rounded-md px-3 py-1.5 dark:text-zinc-100 bg-zinc-100 dark:bg-zinc-700 ring-1 ring-inset ring-zinc-600 focus:ring-2 focus:ring-inset dark:focus:ring-zinc-600 focus:outline-none"
