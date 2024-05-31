@@ -1,12 +1,8 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Button, SunIcon, ToDoItem } from './components';
 import MoonIcon from './components/MoonIcon';
 import useTheme from './hooks/useTheme';
-
-interface Todo {
-  text: string;
-  completed: boolean;
-}
+import useTodos from './hooks/useTodos';
 
 const todoPrompts = [
   'What do you want to do?',
@@ -21,41 +17,18 @@ const todoPrompts = [
 
 function App() {
   const [value, setValue] = useState('');
-  const [todos, setTodos] = useState<Todo[]>(() => {
-    const storedTodos = localStorage.getItem('todos');
-    if (storedTodos) {
-      return JSON.parse(storedTodos);
-    }
-
-    return [];
-  });
+  const { todos, addTodo, toggleTodo, clearTodos } = useTodos();
   const { theme, toggleTheme } = useTheme();
-
-  useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todos));
-  }, [todos]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
-  };
-
-  const clearList = () => {
-    setTodos([]);
-  };
-
-  const toggleToDo = (index: number) => {
-    setTodos((oldTodos) => {
-      const newTodos = oldTodos.slice();
-      newTodos[index].completed = !newTodos[index].completed;
-      return newTodos;
-    });
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!value.trim()) return;
 
-    setTodos((oldTodos) => [...oldTodos, { text: value, completed: false }]);
+    addTodo(value);
     setValue('');
   };
 
@@ -91,13 +64,13 @@ function App() {
               </Button>
             </span>
             <div className="flex justify-end">
-              <Button onClick={clearList}>Clear List</Button>
+              <Button onClick={clearTodos}>Clear List</Button>
             </div>
           </form>
           <ul className="space-y-0.5">
             {todos.map((todo, i) => (
               <li key={todo.text} className="w-fit">
-                <ToDoItem todo={todo} onTodoClick={() => toggleToDo(i)} />
+                <ToDoItem todo={todo} onTodoClick={() => toggleTodo(i)} />
               </li>
             ))}
           </ul>
