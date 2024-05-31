@@ -4,7 +4,8 @@ import { v4 as uuidv4 } from 'uuid';
 interface Todo {
   id: string;
   text: string;
-  completed: boolean;
+  createdTime: number;
+  completedTime: number | null;
 }
 
 export default function useTodos() {
@@ -23,8 +24,13 @@ export default function useTodos() {
 
   const addTodo = useCallback(
     (text: string) => {
-      const id = uuidv4();
-      setTodos((oldTodos) => [...oldTodos, { id, text, completed: false }]);
+      const newTodo: Todo = {
+        id: uuidv4(),
+        text,
+        createdTime: Date.now(),
+        completedTime: null,
+      };
+      setTodos((oldTodos) => [...oldTodos, newTodo]);
     },
     [setTodos]
   );
@@ -36,7 +42,12 @@ export default function useTodos() {
         const index = newTodos.findIndex((todo) => todo.id === id);
         if (index === -1) return oldTodos;
 
-        newTodos[index].completed = !newTodos[index].completed;
+        if (oldTodos[index].completedTime) {
+          newTodos[index].completedTime = null;
+        } else {
+          newTodos[index].completedTime = Date.now();
+        }
+
         return newTodos;
       });
     },

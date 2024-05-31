@@ -37,6 +37,20 @@ function App() {
     []
   );
 
+  const sortedTodos = useMemo(
+    () =>
+      todos.slice().sort((a, b) => {
+        if (a.completedTime && b.completedTime) {
+          return b.completedTime - a.completedTime;
+        }
+        if (!a.completedTime && !b.completedTime) {
+          return b.createdTime - a.createdTime;
+        }
+        return a.completedTime ? 1 : -1;
+      }),
+    [todos]
+  );
+
   return (
     <div className={theme === 'dark' ? 'dark' : ''}>
       <div className="h-screen bg-zinc-100 dark:bg-zinc-800 transition-colors">
@@ -68,7 +82,7 @@ function App() {
             </div>
           </form>
           <ul className="space-y-0.5">
-            {todos.map((todo) => (
+            {sortedTodos.map((todo) => (
               <li key={todo.id} className="w-fit">
                 <ToDoItem todo={todo} onTodoClick={() => toggleTodo(todo.id)} />
               </li>
