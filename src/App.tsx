@@ -96,7 +96,7 @@ function App() {
           </form>
           <ul className="space-y-0.5">
             {todos.map((todo, i) => (
-              <li key={todo.text}>
+              <li key={todo.text} className="w-fit">
                 <ToDoItem todo={todo} onTodoClick={() => toggleToDo(i)} />
               </li>
             ))}
