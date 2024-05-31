@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Button, SunIcon, ToDoItem } from './components';
 import MoonIcon from './components/MoonIcon';
+import useTheme from './hooks/useTheme';
 
 interface Todo {
   text: string;
@@ -28,18 +29,7 @@ function App() {
 
     return [];
   });
-  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
-    const storedTheme = localStorage.getItem('theme');
-    if (storedTheme) {
-      return storedTheme as 'light' | 'dark';
-    }
-
-    return 'dark';
-  });
-
-  useEffect(() => {
-    localStorage.setItem('theme', theme);
-  }, [theme]);
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
@@ -61,10 +51,6 @@ function App() {
     });
   };
 
-  const toggleTheme = () => {
-    setTheme((oldTheme) => (oldTheme === 'light' ? 'dark' : 'light'));
-  };
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!value.trim()) return;
@@ -73,9 +59,14 @@ function App() {
     setValue('');
   };
 
+  const placeholder = useMemo(
+    () => todoPrompts[Math.floor(Math.random() * todoPrompts.length)],
+    []
+  );
+
   return (
     <div className={theme === 'dark' ? 'dark' : ''}>
-      <div className="h-screen bg-zinc-100 dark:bg-zinc-800">
+      <div className="h-screen bg-zinc-100 dark:bg-zinc-800 transition-colors">
         <header className="flex justify-end px-4 py-2">
           <button onClick={toggleTheme}>
             {theme === 'dark' ? (
@@ -90,12 +81,10 @@ function App() {
             <span className="flex flex-row gap-2 py-2">
               <input
                 type="text"
-                placeholder={
-                  todoPrompts[Math.floor(Math.random() * todoPrompts.length)]
-                }
+                placeholder={placeholder}
                 value={value}
                 onChange={handleChange}
-                className="w-full rounded-md px-3 py-1.5 dark:text-zinc-100 bg-zinc-100 dark:bg-zinc-700 ring-1 ring-inset ring-zinc-600 focus:ring-2 focus:ring-inset dark:focus:ring-zinc-600 focus:outline-none"
+                className="w-full rounded-md px-3 py-1.5 dark:text-zinc-100 bg-zinc-100 dark:bg-zinc-700 ring-1 ring-inset ring-zinc-600 focus:ring-2 focus:ring-inset dark:focus:ring-zinc-600 focus:outline-none transition-colors"
               />
               <Button type="submit" disabled={!value.trim()}>
                 Add
