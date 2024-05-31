@@ -14,6 +14,7 @@ const ToDoItem: React.FC<{ todo: Todo; onTodoClick: () => void }> = ({
         checked={todo.completed}
         onChange={onTodoClick}
         className="form-checkbox rounded h-5 w-5"
+        hidden
       />
       <span
         className={
