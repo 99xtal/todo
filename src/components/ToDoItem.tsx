@@ -17,7 +17,7 @@ const ToDoItem: React.FC<{ todo: Todo; onTodoClick: () => void }> = ({
       />
       <span
         className={
-          todo.completed ? 'line-through text-gray-400' : 'text-gray-200'
+          todo.completed ? 'line-through text-gray-400' : 'dark:text-gray-200'
         }
       >
         {todo.text}
