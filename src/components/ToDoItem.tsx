@@ -8,12 +8,11 @@ const ToDoItem: React.FC<{ todo: Todo; onTodoClick: () => void }> = ({
   onTodoClick,
 }) => {
   return (
-    <label className="flex items-center space-x-2">
+    <label className="flex items-center space-x-2 hover:cursor-pointer">
       <input
         type="checkbox"
         checked={todo.completed}
         onChange={onTodoClick}
-        className="form-checkbox rounded h-5 w-5"
         hidden
       />
       <span
