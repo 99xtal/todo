@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 interface Todo {
+  id: string;
   text: string;
   completed: boolean;
 }
@@ -21,15 +23,19 @@ export default function useTodos() {
 
   const addTodo = useCallback(
     (text: string) => {
-      setTodos((oldTodos) => [...oldTodos, { text, completed: false }]);
+      const id = uuidv4();
+      setTodos((oldTodos) => [...oldTodos, { id, text, completed: false }]);
     },
     [setTodos]
   );
 
   const toggleTodo = useCallback(
-    (index: number) => {
+    (id: string) => {
       setTodos((oldTodos) => {
         const newTodos = oldTodos.slice();
+        const index = newTodos.findIndex((todo) => todo.id === id);
+        if (index === -1) return oldTodos;
+
         newTodos[index].completed = !newTodos[index].completed;
         return newTodos;
       });
