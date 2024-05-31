@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Button, ToDoItem } from "./components";
+import { useEffect, useState } from 'react';
+import { Button, ToDoItem } from './components';
 
 interface Todo {
   text: string;
@@ -14,7 +14,7 @@ function App() {
       return JSON.parse(storedTodos);
     }
 
-    return []
+    return [];
   });
 
   useEffect(() => {
@@ -22,16 +22,16 @@ function App() {
   }, [todos]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value)
-  }
+    setValue(e.target.value);
+  };
 
   const clearList = () => {
     setTodos([]);
-  }
+  };
 
   const toggleToDo = (index: number) => {
     setTodos((oldTodos) => {
-      const newTodos = [...oldTodos];
+      const newTodos = oldTodos.slice();
       newTodos[index].completed = !newTodos[index].completed;
       return newTodos;
     });
@@ -43,7 +43,7 @@ function App() {
 
     setTodos((oldTodos) => [...oldTodos, { text: value, completed: false }]);
     setValue('');
-  }
+  };
 
   return (
     <main className="container mx-auto p-4 max-w-xl space-y-2">
@@ -54,9 +54,11 @@ function App() {
             placeholder="What do you want to do?"
             value={value}
             onChange={handleChange}
-            className="block w-full rounded-md px-3 py-1.5 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset" 
+            className="block w-full rounded-md px-3 py-1.5 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset"
           />
-          <Button type="submit" disabled={!value.trim()}>Add</Button>
+          <Button type="submit" disabled={!value.trim()}>
+            Add
+          </Button>
         </span>
         <div className="flex justify-end">
           <Button onClick={clearList}>Clear List</Button>
@@ -70,7 +72,7 @@ function App() {
         ))}
       </ul>
     </main>
-  )
+  );
 }
 
-export default App
+export default App;
