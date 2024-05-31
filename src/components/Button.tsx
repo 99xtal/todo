@@ -6,7 +6,7 @@ const Button: React.FC<React.ButtonHTMLAttributes<HTMLButtonElement>> = ({
 }) => {
   return (
     <button
-      className="my-auto px-2 py-0.5 ring-1 ring-inset ring-gray-300 bg-gray-200 active:bg-gray-400"
+      className="px-3 py-1 bg-cyan-500 active:bg-cyan-700 text-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-600 focus:ring-offset-2 focus:ring-offset-zinc-800 focus:ring-opacity-50 transition-colors"
       {...props}
     >
       {children}

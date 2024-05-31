@@ -46,31 +46,33 @@ function App() {
   };
 
   return (
-    <main className="container mx-auto p-4 max-w-xl space-y-2">
-      <form onSubmit={handleSubmit}>
-        <span className="flex flex-row gap-2 py-2">
-          <input
-            type="text"
-            placeholder="What do you want to do?"
-            value={value}
-            onChange={handleChange}
-            className="block w-full rounded-md px-3 py-1.5 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset"
-          />
-          <Button type="submit" disabled={!value.trim()}>
-            Add
-          </Button>
-        </span>
-        <div className="flex justify-end">
-          <Button onClick={clearList}>Clear List</Button>
-        </div>
-      </form>
-      <ul className="space-y-0.5">
-        {todos.map((todo, i) => (
-          <li key={i + todo.text}>
-            <ToDoItem todo={todo} onTodoClick={() => toggleToDo(i)} />
-          </li>
-        ))}
-      </ul>
+    <main className="h-screen p-4 space-y-2 bg-zinc-800">
+      <div className="container mx-auto max-w-xl">
+        <form onSubmit={handleSubmit}>
+          <span className="flex flex-row gap-2 py-2">
+            <input
+              type="text"
+              placeholder="What do you want to do?"
+              value={value}
+              onChange={handleChange}
+              className="w-full rounded-md px-3 py-1.5 text-zinc-200 bg-zinc-700 ring-1 ring-inset ring-zinc-600 focus:ring-2 focus:ring-inset focus:ring-zinc-600 focus:outline-none"
+            />
+            <Button type="submit" disabled={!value.trim()}>
+              Add
+            </Button>
+          </span>
+          <div className="flex justify-end">
+            <Button onClick={clearList}>Clear List</Button>
+          </div>
+        </form>
+        <ul className="space-y-0.5">
+          {todos.map((todo, i) => (
+            <li key={i + todo.text}>
+              <ToDoItem todo={todo} onTodoClick={() => toggleToDo(i)} />
+            </li>
+          ))}
+        </ul>
+      </div>
     </main>
   );
 }

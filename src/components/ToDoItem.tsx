@@ -13,9 +13,13 @@ const ToDoItem: React.FC<{ todo: Todo; onTodoClick: () => void }> = ({
         type="checkbox"
         checked={todo.completed}
         onChange={onTodoClick}
-        className="form-checkbox rounded text-blue-500 h-5 w-5"
+        className="form-checkbox rounded h-5 w-5"
       />
-      <span className={todo.completed ? 'line-through text-gray-500' : ''}>
+      <span
+        className={
+          todo.completed ? 'line-through text-gray-400' : 'text-gray-200'
+        }
+      >
         {todo.text}
       </span>
     </label>
