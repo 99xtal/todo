@@ -74,7 +74,7 @@ function App() {
             )}
           </button>
         </header>
-        <main className="p-4 space-y-2">
+        <main className="px-4 space-y-2">
           <div className="container mx-auto max-w-xl">
             <form onSubmit={handleSubmit}>
               <span className="flex flex-row gap-2 py-2">
