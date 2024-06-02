@@ -84,7 +84,7 @@ function App() {
           </form>
           <ul className="space-y-0.5 overflow-y-auto">
             {sortedTodos.map((todo) => (
-              <li key={todo.id} className="w-fit">
+              <li key={todo.id}>
                 <ToDoItem todo={todo} onTodoClick={() => toggleTodo(todo.id)} />
               </li>
             ))}
