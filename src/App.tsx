@@ -17,7 +17,7 @@ const todoPrompts = [
 
 function App() {
   const [value, setValue] = useState('');
-  const { todos, addTodo, toggleTodo } = useTodos();
+  const { todos, addTodo, toggleTodo, clearTodos } = useTodos();
   const { theme, toggleTheme } = useTheme();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,7 +63,7 @@ function App() {
             )}
           </button>
         </header>
-        <main className="container mx-auto max-w-xl px-4 space-y-2">
+        <main className="container mx-auto max-w-xl px-4 space-y-2 text-right">
           <form onSubmit={handleSubmit}>
             <span className="flex flex-row gap-2 py-2">
               <input
@@ -84,11 +84,22 @@ function App() {
           </form>
           <ul className="space-y-0.5 overflow-y-auto">
             {sortedTodos.map((todo) => (
-              <li key={todo.id}>
+              <li
+                key={todo.id}
+                className="space-x-2 px-2 py-1 hover:cursor-pointer hover:bg-gray-200 hover:bg-opacity-10 rounded-md transition"
+              >
                 <ToDoItem todo={todo} onTodoClick={() => toggleTodo(todo.id)} />
               </li>
             ))}
           </ul>
+          {todos.length > 0 && (
+            <button
+              onClick={clearTodos}
+              className="px-2 py-1 text-gray-500 hover:cursor-pointer hover:bg-gray-200 hover:bg-opacity-10 rounded-md transition"
+            >
+              Clear All
+            </button>
+          )}
         </main>
       </div>
     </div>
