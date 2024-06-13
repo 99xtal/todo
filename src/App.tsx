@@ -37,39 +37,36 @@ function App() {
   );
 
   return (
-    <div>
-      <div className="h-screen bg-zinc-100 dark:bg-zinc-800 transition-colors">
-        <header className="flex justify-end px-4 py-2">
-          <button onClick={toggleTheme}>
-            {theme === 'dark' ? (
-              <SunIcon className="w-6 h-6 text-zinc-500" />
-            ) : (
-              <MoonIcon className="w-6 h-6 text-zinc-500" />
-            )}
-          </button>
-        </header>
-        <main className="container mx-auto max-w-xl px-4 space-y-2 text-right">
-          <ToDoForm onSubmit={addTodo} placeholder={placeholder} />
-          <ul className="space-y-0.5 overflow-y-auto">
-            {sortedTodos.map((todo) => (
-              <li
-                key={todo.id}
-                className="space-x-2 px-2 py-1 hover:cursor-pointer hover:bg-gray-200 hover:bg-opacity-10 rounded-md transition"
-              >
-                <ToDoItem todo={todo} onTodoClick={() => toggleTodo(todo.id)} />
-              </li>
-            ))}
-          </ul>
-          {todos.length > 0 && (
-            <button
-              onClick={clearTodos}
-              className="px-2 py-1 text-gray-500 hover:cursor-pointer hover:bg-gray-200 hover:bg-opacity-10 rounded-md transition"
-            >
-              Clear All
-            </button>
+    <div className="h-screen bg-zinc-100 dark:bg-zinc-800 transition-colors">
+      <header className="flex justify-end px-4 py-2">
+        <button onClick={toggleTheme}>
+          {theme === 'dark' ? (
+            <SunIcon className="w-6 h-6 text-zinc-500" />
+          ) : (
+            <MoonIcon className="w-6 h-6 text-zinc-500" />
           )}
-        </main>
-      </div>
+        </button>
+      </header>
+      <main className="container mx-auto max-w-xl px-4 space-y-2 text-right">
+        <ToDoForm onSubmit={addTodo} placeholder={placeholder} />
+        <ul className="space-y-0.5 overflow-y-auto">
+          {sortedTodos.map((todo) => (
+            <ToDoItem
+              key={todo.id}
+              todo={todo}
+              onTodoClick={() => toggleTodo(todo.id)}
+            />
+          ))}
+        </ul>
+        {todos.length > 0 && (
+          <button
+            onClick={clearTodos}
+            className="px-2 py-1 text-gray-500 hover:cursor-pointer hover:bg-gray-200 hover:bg-opacity-10 rounded-md transition"
+          >
+            Clear All
+          </button>
+        )}
+      </main>
     </div>
   );
 }
