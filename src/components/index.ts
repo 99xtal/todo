@@ -1,7 +1,15 @@
-import Button from './Button';
 import MoonIcon from './MoonIcon';
+import PrimaryButton from './PrimaryButton';
+import SecondaryButton from './SecondaryButton';
 import SunIcon from './SunIcon';
 import ToDoForm from './ToDoForm';
 import ToDoItem from './ToDoItem';
 
-export { Button, MoonIcon, SunIcon, ToDoForm, ToDoItem };
+export {
+  PrimaryButton,
+  MoonIcon,
+  SecondaryButton,
+  SunIcon,
+  ToDoForm,
+  ToDoItem,
+};

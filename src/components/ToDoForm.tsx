@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Button from './Button';
+import PrimaryButton from './PrimaryButton';
 
 interface TodoFormProps {
   onSubmit?: (value: string) => void;
@@ -31,9 +31,13 @@ const ToDoForm: React.FC<TodoFormProps> = ({ onSubmit, placeholder }) => {
           onChange={handleChange}
           className="w-full rounded-md px-3 py-1.5 dark:text-zinc-100 bg-zinc-100 dark:bg-zinc-700 ring-1 ring-inset ring-zinc-600 focus:ring-2 focus:ring-inset dark:focus:ring-zinc-600 focus:outline-none transition-colors"
         />
-        <Button type="submit" aria-label="add-todo" disabled={!value.trim()}>
+        <PrimaryButton
+          type="submit"
+          aria-label="add-todo"
+          disabled={!value.trim()}
+        >
           +
-        </Button>
+        </PrimaryButton>
       </span>
     </form>
   );

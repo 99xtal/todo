@@ -1,5 +1,11 @@
 import { useMemo } from 'react';
-import { MoonIcon, SunIcon, ToDoForm, ToDoItem } from './components';
+import {
+  MoonIcon,
+  SecondaryButton,
+  SunIcon,
+  ToDoForm,
+  ToDoItem,
+} from './components';
 import { useTheme, useTodos } from './hooks';
 import { getRandomElement } from './utils';
 import { prompts } from '../config.json';
@@ -47,12 +53,7 @@ function App() {
           ))}
         </ul>
         {todos.length > 0 && (
-          <button
-            onClick={clearTodos}
-            className="px-2 py-1 text-gray-500 hover:cursor-pointer hover:bg-gray-200 hover:bg-opacity-10 rounded-md transition"
-          >
-            Clear All
-          </button>
+          <SecondaryButton onClick={clearTodos}>Clear All</SecondaryButton>
         )}
       </main>
     </div>
