@@ -1,8 +1,6 @@
 import { useMemo } from 'react';
-import { SunIcon, ToDoForm, ToDoItem } from './components';
-import MoonIcon from './components/MoonIcon';
-import useTheme from './hooks/useTheme';
-import useTodos from './hooks/useTodos';
+import { MoonIcon, SunIcon, ToDoForm, ToDoItem } from './components';
+import { useTheme, useTodos } from './hooks';
 
 const todoPrompts = [
   'What do you want to do?',
