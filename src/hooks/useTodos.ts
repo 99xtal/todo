@@ -1,12 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-
-interface Todo {
-  id: string;
-  text: string;
-  createdTime: number;
-  completedTime: number | null;
-}
+import { Todo } from '../types';
 
 export default function useTodos() {
   const [todos, setTodos] = useState<Todo[]>(() => {
