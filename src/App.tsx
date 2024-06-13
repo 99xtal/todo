@@ -1,26 +1,14 @@
 import { useMemo } from 'react';
 import { MoonIcon, SunIcon, ToDoForm, ToDoItem } from './components';
 import { useTheme, useTodos } from './hooks';
-
-const todoPrompts = [
-  'What do you want to do?',
-  'What do you want to accomplish?',
-  'What do you want to achieve?',
-  'What do you want to complete?',
-  'What do you want to finish?',
-  'What do you want to work on?',
-  'What do you want to start?',
-  'What do you want to improve?',
-];
+import { getRandomElement } from './utils';
+import { prompts } from '../config.json';
 
 function App() {
   const { todos, addTodo, toggleTodo, clearTodos } = useTodos();
   const { theme, toggleTheme } = useTheme();
 
-  const placeholder = useMemo(
-    () => todoPrompts[Math.floor(Math.random() * todoPrompts.length)],
-    []
-  );
+  const placeholder = useMemo(() => getRandomElement(prompts), []);
 
   const sortedTodos = useMemo(
     () =>
