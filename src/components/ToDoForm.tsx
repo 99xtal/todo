@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import PrimaryButton from './PrimaryButton';
+import PrimaryButton from '../elements/PrimaryButton';
+import { TextInput } from '../elements';
 
 interface TodoFormProps {
   onSubmit?: (value: string) => void;
@@ -24,12 +25,10 @@ const ToDoForm: React.FC<TodoFormProps> = ({ onSubmit, placeholder }) => {
   return (
     <form onSubmit={handleSubmit}>
       <span className="flex flex-row gap-2 py-2">
-        <input
-          type="text"
+        <TextInput
           placeholder={placeholder}
           value={value}
           onChange={handleChange}
-          className="w-full rounded-md px-3 py-1.5 dark:text-zinc-100 bg-zinc-100 dark:bg-zinc-700 ring-1 ring-inset ring-zinc-600 focus:ring-2 focus:ring-inset dark:focus:ring-zinc-600 focus:outline-none transition-colors"
         />
         <PrimaryButton
           type="submit"

@@ -1,14 +1,9 @@
 import { useMemo } from 'react';
-import {
-  MoonIcon,
-  SecondaryButton,
-  SunIcon,
-  ToDoForm,
-  ToDoItem,
-} from './components';
+import { MoonIcon, SunIcon, ToDoForm, ToDoItem } from './components';
 import { useTheme, useTodos } from './hooks';
 import { getRandomElement } from './utils';
 import { prompts } from '../config.json';
+import { SecondaryButton } from './elements';
 
 function App() {
   const { todos, addTodo, toggleTodo, clearTodos } = useTodos();
