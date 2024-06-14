@@ -11,20 +11,6 @@ function App() {
 
   const placeholder = useMemo(() => getRandomElement(prompts), []);
 
-  const sortedTodos = useMemo(
-    () =>
-      todos.slice().sort((a, b) => {
-        if (a.completedTime && b.completedTime) {
-          return b.completedTime - a.completedTime;
-        }
-        if (!a.completedTime && !b.completedTime) {
-          return b.createdTime - a.createdTime;
-        }
-        return a.completedTime ? 1 : -1;
-      }),
-    [todos]
-  );
-
   return (
     <div className="h-screen bg-zinc-100 dark:bg-zinc-800 transition-colors">
       <header className="flex justify-end px-4 py-2">
@@ -39,7 +25,7 @@ function App() {
       <main className="container mx-auto max-w-xl px-4 space-y-2 text-right">
         <ToDoForm onSubmit={addTodo} placeholder={placeholder} />
         <ul className="space-y-0.5 overflow-y-auto">
-          {sortedTodos.map((todo) => (
+          {todos.map((todo) => (
             <ToDoItem
               key={todo.id}
               todo={todo}

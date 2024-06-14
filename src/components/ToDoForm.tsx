@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import PrimaryButton from '../elements/PrimaryButton';
-import { TextInput } from '../elements';
+import { PrimaryButton, TextInput } from '../elements';
 
 interface TodoFormProps {
   onSubmit?: (value: string) => void;

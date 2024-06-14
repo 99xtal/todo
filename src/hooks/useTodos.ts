@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { Todo } from '../types';
 
@@ -15,6 +15,20 @@ export default function useTodos() {
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
+
+  const sortedTodos = useMemo(
+    () =>
+      todos.slice().sort((a, b) => {
+        if (a.completedTime && b.completedTime) {
+          return b.completedTime - a.completedTime;
+        }
+        if (!a.completedTime && !b.completedTime) {
+          return b.createdTime - a.createdTime;
+        }
+        return a.completedTime ? 1 : -1;
+      }),
+    [todos]
+  );
 
   const addTodo = useCallback(
     (text: string) => {
@@ -53,7 +67,7 @@ export default function useTodos() {
   }, [setTodos]);
 
   return {
-    todos,
+    todos: sortedTodos,
     addTodo,
     clearTodos,
     toggleTodo,
