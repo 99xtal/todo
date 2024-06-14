@@ -16,7 +16,7 @@ const ToDoItem: React.FC<Props> = ({ todo, onTodoClick }) => {
           hidden
         />
         <span
-          className={`transition ${
+          className={`transition text-left ${
             todo.completedTime
               ? 'line-through text-gray-400'
               : 'dark:text-gray-200'
