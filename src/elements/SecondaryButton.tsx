@@ -5,7 +5,7 @@ const SecondaryButton: React.FC<
 > = ({ children, ...props }) => {
   return (
     <button
-      className="px-2 py-1 text-gray-500 hover:cursor-pointer hover:bg-gray-200 hover:bg-opacity-10 rounded-md transition"
+      className="px-2 py-1 text-gray-500 dark:text-gray-300 hover:cursor-pointer hover:bg-gray-200 hover:bg-opacity-10 rounded-md transition"
       {...props}
     >
       {children}
