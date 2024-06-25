@@ -14,7 +14,12 @@ function App() {
   return (
     <div className="h-screen bg-zinc-100 dark:bg-zinc-800 transition-colors">
       <header className="flex justify-end px-4 py-2">
-        <button onClick={toggleTheme}>
+        <button
+          onClick={toggleTheme}
+          aria-label={
+            theme === 'dark' ? 'Toggle light mode' : 'Toggle dark mode'
+          }
+        >
           {theme === 'dark' ? (
             <SunIcon className="w-6 h-6 text-zinc-500" />
           ) : (
