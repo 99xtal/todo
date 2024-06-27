@@ -1,13 +1,38 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+
 import { MoonIcon, SunIcon, ToDoForm, ToDoItem } from './components';
-import { useTheme, useTodos } from './hooks';
+import { useInstallPrompt, useSettings, useTheme, useTodos } from './hooks';
 import { getRandomElement } from './utils';
 import { prompts } from '../config.json';
 import { SecondaryButton } from './elements';
 
+import 'react-toastify/dist/ReactToastify.css';
+
 function App() {
   const { todos, addTodo, toggleTodo, clearTodos } = useTodos();
   const { theme, toggleTheme } = useTheme();
+  const { isInstallable, promptInstall } = useInstallPrompt();
+  const { settings, setSetting } = useSettings();
+
+  useEffect(() => {
+    if (isInstallable && !settings.hideInstallPrompt) {
+      toast("Install 'Todo' to your device", {
+        onClick: async () => {
+          const userChoice = await promptInstall();
+
+          if (userChoice?.outcome === 'accepted') {
+            toast('Installed successfully!');
+          } else if (userChoice?.outcome === 'dismissed') {
+            setSetting('hideInstallPrompt', true);
+          }
+        },
+        onClose: () => {
+          setSetting('hideInstallPrompt', true);
+        },
+      });
+    }
+  }, [isInstallable, settings.hideInstallPrompt, promptInstall, setSetting]);
 
   const placeholder = useMemo(() => getRandomElement(prompts), []);
 
@@ -42,6 +67,7 @@ function App() {
           <SecondaryButton onClick={clearTodos}>Clear All</SecondaryButton>
         )}
       </main>
+      <ToastContainer hideProgressBar position="bottom-right" theme="dark" />
     </div>
   );
 }
