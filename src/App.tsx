@@ -1,11 +1,13 @@
 import { useEffect, useMemo } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 
-import { MoonIcon, SunIcon, ToDoForm, ToDoItem } from './components';
+import { ToDoForm, ToDoItem } from './components';
 import { useInstallPrompt, useSettings, useTheme, useTodos } from './hooks';
 import { getRandomElement } from './utils';
 import { prompts } from '../config.json';
 import { SecondaryButton } from './elements';
+import sunIcon from './assets/sun.svg';
+import moonIcon from './assets/moon.svg';
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -41,15 +43,9 @@ function App() {
       <header className="flex justify-end px-4 py-2">
         <button
           onClick={toggleTheme}
-          aria-label={
-            theme === 'dark' ? 'Toggle light mode' : 'Toggle dark mode'
-          }
+          aria-label={`Toggle ${theme === 'dark' ? 'light' : 'dark'} mode`}
         >
-          {theme === 'dark' ? (
-            <SunIcon className="w-6 h-6 text-zinc-500" />
-          ) : (
-            <MoonIcon className="w-6 h-6 text-zinc-500" />
-          )}
+          <img src={theme === 'dark' ? sunIcon : moonIcon} />
         </button>
       </header>
       <main className="container mx-auto max-w-xl px-4 space-y-2 text-right">

@@ -1,6 +1,5 @@
-import MoonIcon from './MoonIcon';
-import SunIcon from './SunIcon';
+import SettingsForm from './SettingsForm';
 import ToDoForm from './ToDoForm';
 import ToDoItem from './ToDoItem';
 
-export { MoonIcon, SunIcon, ToDoForm, ToDoItem };
+export { SettingsForm, ToDoForm, ToDoItem };
