@@ -37,7 +37,7 @@ function App() {
   const placeholder = useMemo(() => getRandomElement(prompts), []);
 
   return (
-    <div className="h-screen bg-zinc-100 dark:bg-zinc-800 transition-colors">
+    <div>
       <header className="flex justify-end px-4 py-2">
         <button
           onClick={toggleTheme}
